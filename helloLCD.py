@@ -23,4 +23,4 @@ while (True):
     else:
         lcd.clear()
         lcd.message(displayText2)
-    time.sleep(0.5)
+    #time.sleep(0.5)
