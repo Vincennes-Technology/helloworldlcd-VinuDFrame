@@ -4,20 +4,23 @@
 
 import Adafruit_CharLCD as LCD
 import time
+import subprocess
 
 lcd = LCD.Adafruit_CharLCDPlate()
 
-displayText = "Hello World\n"
+displayText = "Hello World"
+
+Name = subprocess.check_output(['hostname']).strip()
+IPaddr = subprocess.check_output(['hostname','-I'])
+displayText2 = IPaddr + Name
 
 lcd.clear()
-lcd.message(displayText)
-
+lcd.set_backlight(1)
 while (True):
-    if lcd.is_pressed(LCD.UP):
-        lcd.set_backlight(1)
-        lcd.message(displayText)
-
-    else:
-        lcd.set_backlight(0)
+    if lcd.is_pressed(LCD.SELECT):
         lcd.clear()
-        time.sleep(0.5)
+        lcd.message(displayText)
+    else:
+        lcd.clear()
+        lcd.message(displayText2)
+    time.sleep(0.5)
